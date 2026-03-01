@@ -1,0 +1,44 @@
+# A- A- RatPriest game calendar
+#Curday = 1
+#in event screens 2 and 3 arent done by wk2 end, drop 2nd case to focus on final and polish
+
+Week 1 (2-8) {
+	Mon: decide 2d or 3d, Design Levels, Start basic movement
+	Tue: 
+	Wed:
+	Thu: 
+	Fri:
+	Sat:
+	Sun: Have a prototype of screen 1, 8, 9
+}
+Week 2 (9-15) {
+	Mon: 
+	Tue:
+	Wed:
+	Thu: 
+	Fri:
+	Sat:
+	Sun: Have screens 1 and 2/3 done
+}
+Week 3 (16-22) {
+	Mon: 
+	Tue:
+	Wed:
+	Thu: 
+	Fri:
+	Sat:
+	Sun: Have screens 4/5 done
+}
+Week 4 (23-29) {
+	Mon: 
+	Tue:
+	Wed:
+	Thu: 
+	Fri:
+	Sat:
+	Sun: Have screens 6/7/10 done
+}
+Finaliser (30/31) {
+	Mon: Polish/Export 
+	Tue: Web&EXE Export Due
+}
