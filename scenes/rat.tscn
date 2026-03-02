@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://c3truttpb3as"]
+
+[ext_resource type="Script" uid="uid://dgfy2it0x1cmw" path="res://scenes/rat.gd" id="1_1l88y"]
+[ext_resource type="Texture2D" uid="uid://csgqnhmnxduhx" path="res://assets/rat_case/rat_sprite_sheet.png" id="2_77a1s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1l88y"]
+size = Vector2(27, 51.89)
+
+[sub_resource type="Animation" id="Animation_acf8p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rat_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_3csnj"]
+resource_name = "idle"
+length = 1.6
+loop_mode = 1
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rat_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333337, 0.6666667, 1, 1.3333334, 1.3334334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5, 3, 3]
+}
+
+[sub_resource type="Animation" id="Animation_77a1s"]
+resource_name = "run"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rat_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6s34g"]
+_data = {
+&"RESET": SubResource("Animation_acf8p"),
+&"idle": SubResource("Animation_3csnj"),
+&"run": SubResource("Animation_77a1s")
+}
+
+[node name="Rat" type="CharacterBody2D" unique_id=1189129737]
+script = ExtResource("1_1l88y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=180618991]
+position = Vector2(0.5, 3.5)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_1l88y")
+
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=609639735]
+wait_time = 0.25
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=545073309]
+zoom = Vector2(2, 2)
+
+[node name="Rat_Sprite" type="Sprite2D" parent="." unique_id=579630178]
+texture = ExtResource("2_77a1s")
+hframes = 7
+frame = 2
+
+[node name="Rat_Anims" type="AnimationPlayer" parent="." unique_id=655393518]
+libraries/ = SubResource("AnimationLibrary_6s34g")
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="CoyoteEnd"]

@@ -3,7 +3,7 @@
 #in event screens 2 and 3 arent done by wk2 end, drop 2nd case to focus on final and polish
 
 Week 1 (2-8) {
-	Mon: decide 2d or 3d, Design Levels, Start basic movement
+	Mon: decide 2d or 3d, Design Levels, Start basic movement for screen 9
 	Tue: 
 	Wed:
 	Thu: 

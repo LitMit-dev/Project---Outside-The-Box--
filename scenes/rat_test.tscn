@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dxyetw5emwv13"]
+
+[ext_resource type="PackedScene" uid="uid://c3truttpb3as" path="res://scenes/rat.tscn" id="1_y457h"]
+
+[sub_resource type="Gradient" id="Gradient_y457h"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eqwmn"]
+gradient = SubResource("Gradient_y457h")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ltao"]
+size = Vector2(415, 224)
+
+[node name="RatTest" type="Node2D" unique_id=1742973332]
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=289205549]
+offset_left = -324.0
+offset_top = 156.0
+offset_right = -68.0
+offset_bottom = 196.0
+texture = SubResource("GradientTexture1D_eqwmn")
+
+[node name="TextureRect3" type="TextureRect" parent="." unique_id=411575860]
+offset_left = 142.0
+offset_top = 156.0
+offset_right = 565.0
+offset_bottom = 196.0
+texture = SubResource("GradientTexture1D_eqwmn")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=860362783]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=847447893]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1458691458]
+position = Vector2(-274.5, 266)
+shape = SubResource("RectangleShape2D_8ltao")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1229305389]
+position = Vector2(353, 266)
+shape = SubResource("RectangleShape2D_8ltao")
+
+[node name="Rat" parent="." unique_id=1189129737 instance=ExtResource("1_y457h")]
+position = Vector2(-205, 66)
