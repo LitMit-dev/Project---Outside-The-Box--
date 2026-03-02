@@ -1,12 +1,13 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
-const jump_speed = -405.0
+const SPEED = 340.0
+const jump_speed = -590.0
 var jumpAvailible = true
 
 func jump():
 	velocity.y = jump_speed
+	$Rat_Sprite.frame = 1
 	jumpAvailible = false
 
 func CoyoteEnd():
@@ -15,6 +16,12 @@ func CoyoteEnd():
 func _physics_process(delta):
 	if velocity.y <= 0 and !jumpAvailible and is_on_floor():
 		jumpAvailible = true
+	
+	if velocity.y > 0 and !jumpAvailible:
+		$Rat_Anims.play("fall")
+	elif velocity.y <= 0 and !is_on_floor():
+		$Rat_Anims.play("rise")
+	
 
 	velocity += get_gravity() * delta
 
@@ -32,8 +39,6 @@ func _physics_process(delta):
 		$Rat_Sprite.flip_h = velocity.x > 0
 		if is_on_floor_only():
 			$Rat_Anims.play("run")
-		else: 
-			$Rat_Anims.play("idle") #placeholder for jumpanim
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		if is_on_floor_only():
