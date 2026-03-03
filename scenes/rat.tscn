@@ -3,8 +3,12 @@
 [ext_resource type="Script" uid="uid://dgfy2it0x1cmw" path="res://scenes/rat.gd" id="1_1l88y"]
 [ext_resource type="Texture2D" uid="uid://csgqnhmnxduhx" path="res://assets/rat_case/rat_sprite_sheet.png" id="2_77a1s"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1l88y"]
-size = Vector2(27, 26)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_77a1s"]
+radius = 17.0
+height = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_77a1s"]
+size = Vector2(27, 10)
 
 [sub_resource type="Animation" id="Animation_acf8p"]
 length = 0.001
@@ -104,10 +108,14 @@ _data = {
 z_index = 5
 script = ExtResource("1_1l88y")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=180618991]
-position = Vector2(0, 3.4999995)
+[node name="collider1" type="CollisionShape2D" parent="." unique_id=1097887317]
 rotation = 1.5707964
-shape = SubResource("RectangleShape2D_1l88y")
+shape = SubResource("CapsuleShape2D_77a1s")
+
+[node name="collider0" type="CollisionShape2D" parent="." unique_id=22856481]
+position = Vector2(-2.3841858e-07, 3.5)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_77a1s")
 
 [node name="CoyoteTimer" type="Timer" parent="." unique_id=609639735]
 wait_time = 0.25
@@ -123,5 +131,17 @@ frame = 2
 
 [node name="Rat_Anims" type="AnimationPlayer" parent="." unique_id=655393518]
 libraries/ = SubResource("AnimationLibrary_6s34g")
+
+[node name="floorbelow2" type="RayCast2D" parent="." unique_id=1879181878]
+position = Vector2(-13, 18)
+exclude_parent = false
+target_position = Vector2(0, 1)
+hit_from_inside = true
+
+[node name="floorbelow3" type="RayCast2D" parent="." unique_id=1743111405]
+position = Vector2(12, 18)
+exclude_parent = false
+target_position = Vector2(0, 1)
+hit_from_inside = true
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="CoyoteEnd"]

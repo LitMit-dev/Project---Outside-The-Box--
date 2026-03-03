@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-
+var col
 const SPEED = 340.0
 const jump_speed = -590.0
 var jumpAvailible = true
@@ -14,6 +14,11 @@ func CoyoteEnd():
 	jumpAvailible = false
 
 func _physics_process(delta):
+	#finish off tmr
+	col = ($floorbelow2.is_colliding() and $floorbelow3.is_colliding())
+	get_node("collider0").disabled = col
+	get_node("collider1").disabled = !col
+	
 	if velocity.y <= 0 and !jumpAvailible and is_on_floor():
 		jumpAvailible = true
 	
