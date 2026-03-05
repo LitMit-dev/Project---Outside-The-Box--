@@ -311,6 +311,7 @@ offset_bottom = -33.0
 placeholder_text = "LAMIER"
 alignment = 1
 max_length = 5
+keep_editing_on_text_submit = true
 context_menu_enabled = false
 emoji_menu_enabled = false
 shortcut_keys_enabled = false
@@ -329,7 +330,7 @@ offset_bottom = 31.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_horizontal = 3
 theme = SubResource("Theme_0g0h3")
-text = "W"
+text = "_"
 horizontal_alignment = 1
 
 [node name="1" type="Label" parent="LETTERBOX" unique_id=8310365]
@@ -340,7 +341,7 @@ offset_bottom = 31.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_horizontal = 3
 theme = SubResource("Theme_0g0h3")
-text = "W"
+text = "_"
 horizontal_alignment = 1
 
 [node name="2" type="Label" parent="LETTERBOX" unique_id=1129848614]
@@ -351,7 +352,7 @@ offset_bottom = 31.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_horizontal = 3
 theme = SubResource("Theme_0g0h3")
-text = "W"
+text = "_"
 horizontal_alignment = 1
 
 [node name="3" type="Label" parent="LETTERBOX" unique_id=65938730]
@@ -362,7 +363,7 @@ offset_bottom = 31.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_horizontal = 3
 theme = SubResource("Theme_0g0h3")
-text = "W"
+text = "_"
 horizontal_alignment = 1
 
 [node name="4" type="Label" parent="LETTERBOX" unique_id=1881239718]
@@ -373,9 +374,8 @@ offset_bottom = 31.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_horizontal = 3
 theme = SubResource("Theme_0g0h3")
-text = "W"
+text = "_"
 horizontal_alignment = 1
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="CoyoteEnd"]
 [connection signal="text_changed" from="LineEdit" to="." method="check_text"]
-[connection signal="text_submitted" from="LineEdit" to="." method="text_submit"]

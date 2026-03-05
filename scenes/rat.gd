@@ -4,15 +4,15 @@ var col
 const SPEED = 340.0
 const jump_speed = -590.0
 var jumpAvailible = true
-
+var MAX_TEXT = 5
 var isSinging = false
 
 var text = "_____"
 
 func update_voice():
 	$LineEdit.text = $LineEdit.text.remove_chars(" ")
-	$LineEdit.caret_column = 5
-	for i in range(5):
+	$LineEdit.caret_column = MAX_TEXT
+	for i in range(MAX_TEXT):
 		if i >= len($LineEdit.text):
 			text[i] = "_"
 		else:
@@ -47,17 +47,17 @@ func _input(event: InputEvent) -> void:
 			start_voice()
 		elif event.is_action_pressed("END_SONG") and isSinging:
 			end_voice()
+	
 			
 func _process(delta: float) -> void:
 	if isSinging:
-		$LineEdit.grab_focus()
 		update_voice()
 		for i in [0,1,2,3,4]:
 			if i == $LineEdit.caret_column:
 				get_node("LETTERBOX/" + str(i)).modulate = Color(1.0, 1.0, 0.0, 1.0)
 			else:
 				get_node("LETTERBOX/" + str(i)).modulate = Color(1.0, 1.0, 1.0, 1.0)
-	
+
 
 func _physics_process(delta):
 	
@@ -102,9 +102,3 @@ func check_text(new_text: String) -> void:
 	$LineEdit.text = new_text.remove_chars("E")
 	$LineEdit.text = new_text.remove_chars("e")
 	
-	
-
-
-func text_submit(new_text: String) -> void:
-	$LineEdit.grab_focus()
-	#fix
