@@ -1,0 +1,54 @@
+
+Priest 
+Start: start in confessional
+mov text of confession
+chn bg to discovering mannequin 
+
+cut,
+chn bg talking/exdet. cafe.
+mov text of asking opinion on what happened
+get opt - where to look - .Wife apartment .autopsist visit
+	
+	ctsn drop tape machine in drain on way
+	
+	.WA =: +neg det opinion
+		chn bg apartment
+		mov text interog
+		easteregg Rat_Window
+		mov text reveal
+		conv next_step
+	.AV =: +pos det opinion
+		chn bg coldroom
+		mov text interog
+		mov text reveal
+		conv next_step
+
+cut,
+chn bg cafe
+mov is that noise bugging you? must be why lack of customers
+mov text why doing this
+get opt - why? - .Refuse say .Letter may have been for me
+	.RS=: +neg opinion
+		mov text disgust but understanding
+		conv looking over area
+		
+	.LM=: +pos opinion
+		mov text thanking honesty, reassure you are non suspect
+		conv looking over area 
+
+cut,
+chn bg see rat with tape rec saying mocha
+mov am i going crazy
+tscn chase rat
+
+chn bg ratbrought behind bakery
+mov replay with humming matching bakery direction
+
+mov it's genius, salt bagels, no poison. just heart failure
+mov text closed for the past week though
+mov text just go in
+tscn pick up rat (put in box) and go in bakery
+
+cut, option to now play as rat or continue as priest
+
+Missing persons case -> Goes to ex-detective double partner -> go to abbot wife -> finds out wish to mail and heart probs -> find baker in cafe or smth -> turns out abbot just really liked the bagels but died of too much salt

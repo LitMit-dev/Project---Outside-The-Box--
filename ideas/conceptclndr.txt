@@ -10,7 +10,7 @@ Week 1 (2-8) {
 	##########Wed: implement speak sys
 	###########Thu: create ALL necessary art for screen 1 
 	###########Fri: create ALL necessary art for screen 1 
-	Sat: implement art/tilemaps necessary
+	###########Sat: implement art/tilemaps necessary
 	Sun: Have a playable prototype of screen 1, 2
 }
 Week 2 (9-15) {

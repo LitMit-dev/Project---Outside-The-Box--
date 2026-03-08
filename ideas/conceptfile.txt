@@ -9,3 +9,28 @@ rat mechanics:
 	
 priest mechanics:
 	-
+
+#Rat Start: jump out of box
+#then find tape recorder with tapes
+#then find scrap newspapers
+#then walk to and enter pipes
+#
+#Next: end up on balcony
+#
+#then walk along, see man writing about "Norah" and why she doesnt like SHOCKS, and mention fear of rats
+#walk and find window of norahs, say norah to get attention almost get swatted away, plantpot gets knocked down, newspaper thrown for more lore
+]see priest and det. in window
+]go in other open window and pan camera down to street where rat emerges
+
+Next: land in cafe rainsheet and enter cafe
+piece together magazine of least popular order
+say "mocha" or "latte" (least popular order) scare people and get picked up with owner complaining about "2nd depression"
+
+brought in bakery
+choice to play as rat or priest
+
+navigate boxes stacks and around hot oven
+read numbers pamphlet
+call killers cellphone
+
+End:
