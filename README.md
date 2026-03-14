@@ -1,2 +1,4 @@
 # Project - Outside The Box -
-For a jam.
+For the Bad Ideas Game jam 2026.
+
+Featuring a rat and a priest during a mystery.
