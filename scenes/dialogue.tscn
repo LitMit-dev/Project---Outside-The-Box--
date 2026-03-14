@@ -58,8 +58,8 @@ text = "Father Sidney"
 offset_left = 153.0
 offset_top = 476.0
 offset_right = 752.0
-offset_bottom = 571.0
-theme_override_constants/line_separation = -11
+offset_bottom = 560.0
+theme_override_constants/line_separation = -16
 theme_override_fonts/normal_font = ExtResource("2_bfpow")
 theme_override_font_sizes/normal_font_size = 53
 bbcode_enabled = true
@@ -68,9 +68,7 @@ scroll_active = false
 visible_characters_behavior = 1
 
 [node name="next_indic" type="Polygon2D" parent="." unique_id=1505186883]
-visible = false
-position = Vector2(769.99994, 564)
-rotation = -0.64307106
-scale = Vector2(0.7, 0.96153843)
+position = Vector2(453.00003, 572.6809)
+scale = Vector2(0.7, 0.72189194)
 offset = Vector2(-704.28577, -562.64)
 polygon = PackedVector2Array(684, 552, 724, 552, 704.00006, 578)

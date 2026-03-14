@@ -1,7 +1,7 @@
 
 Priest - Father Sidney
 Detective - Detective Cain
-safezone: 800x390, still use 800x600
+safezone: 800x420, still use 800x600
 
 Start: start in confessional
 mov text of confession
