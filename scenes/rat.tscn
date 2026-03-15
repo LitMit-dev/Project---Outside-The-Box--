@@ -264,6 +264,7 @@ default_font_size = 38
 
 [node name="Rat" type="CharacterBody2D" unique_id=1189129737]
 z_index = 5
+floor_stop_on_slope = false
 script = ExtResource("1_1l88y")
 
 [node name="collider0" type="CollisionShape2D" parent="." unique_id=22856481]

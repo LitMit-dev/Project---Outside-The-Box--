@@ -19,15 +19,15 @@ Week 2 (9-15) {
 	##Wed: roto-boards + more like finish area 4 screen 1
 	####Thu: roto-boards
 	##Fri: break
-	Sat: draw storyboarded locations DEADLINE; Have screen 2 90% artified
-	Sun: Have screen 3 at least partially done
+	#####Sat: draw storyboarded locations DEADLINE; Have screen 2 90% artified
+	Sun: Work on screen 2 mechanics
 }
 Week 3 (16-22) {
-	Mon: 
-	Tue:
-	Wed:
-	Thu: 
-	Fri:
+	Mon: Animate for screen 3
+	Tue: Animate for screen 3
+	Wed: Animate for screen 3
+	Thu: Draw badges 
+	Fri: 
 	Sat: WRITING DEADLINE
 	Sun: Have screens 2/3 done
 }
