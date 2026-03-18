@@ -3,16 +3,16 @@ Priest - Father Sidney
 Detective - P.I Roman
 safezone: 800x420, still use 800x600
 
-Start: start in confessional
+Start: start in confessional - 6am: winter, sun rises at 8am
 mov text of confession
 chn bg to discovering mannequin 
 
 cut,
-chn bg talking/exdet. cafe.
+chn bg talking/exdet. cafe. - 7amish
 mov text of asking opinion on what happened
 get opt - where to look - .Wife apartment .autopsist visit
 	
-	ctsn drop tape machine in drain on way
+	ctsn drop tape machine in drain on way - 7:30am
 	
 	.WA =: +neg det opinion
 		chn bg apartment
@@ -27,7 +27,7 @@ get opt - where to look - .Wife apartment .autopsist visit
 		conv next_step
 
 cut,
-chn bg cafe
+chn bg cafe - 11am
 mov is that noise bugging you? must be why lack of customers
 mov text why doing this
 get opt - why? - .Refuse say .Letter may have been for me
@@ -39,7 +39,7 @@ get opt - why? - .Refuse say .Letter may have been for me
 		mov text thanking honesty, reassure you are non suspect
 		conv looking over area 
 
-cut,
+cut, 
 chn bg see rat with tape rec saying mocha
 mov am i going crazy
 tscn chase rat
@@ -64,7 +64,7 @@ mov baker asks what theyre doing here
 mov text det confrontation
 get OPT - .FORGIVE (IF DET POSITIVE M00D, 50/50 IF NEUTRAL) OR .ARREST:
 	.f:
-		mov anim give tape
+		anim give tape
 		mov text forgiveness text
 		chn bg dark room
 		mov text dear roman, i hope ...

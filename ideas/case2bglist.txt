@@ -5,8 +5,16 @@ Start: start in confessional
 -chn bg apartment
 -easteregg Rat_Window
 -chn bg coldroom
--chn bg cafe
 -chn bg see rat with tape rec saying mocha
 -tscn chase rat
 -chn bg ratbrought behind bakery
 -tscn pick up rat (put in box) and go in bakery
+-door open
+
+-chn bg at desk
+-chn bg at corner hallway
+frame above 2 as same shot instead, dif anims
+-anim givetape
+-chn bg dark room writing letter
+-anim look at P.I
+-chn bg sitting on stairs
