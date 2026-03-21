@@ -1,32 +1,41 @@
 extends CanvasLayer
 
+class_name animatedBg
+
 var active_anim = false
 
-var bg_index = {
+signal anim_looped
+
+const bg_index = {
 	
 	confess1 = "res://assets/priest_case/bgs/priestcase01.png",
 	confess2 = "res://assets/priest_case/bgs/priestcase02.png",
+	
 	cafe_morning = "res://assets/priest_case/bgs/priestcase03.png",
 	street_overhead = "res://assets/priest_case/bgs/priestcase04.png",
 	drain = "res://assets/priest_case/bgs/priestcase05.png",
+	
 	spouse_path = "res://assets/priest_case/bgs/priestcase06A.png",
 	lab_path = "res://assets/priest_case/bgs/priestcase06B.png",
+	
 	cafe_day = "res://assets/priest_case/bgs/priestcase07.png",
 	cafe_see_rat = "res://assets/priest_case/bgs/priestcase08.png",
 	deadend_alley = "res://assets/priest_case/bgs/priestcase09.png",
 	bakery_door = "res://assets/priest_case/bgs/priestcase10.png",
 	waiting_door = "res://assets/priest_case/bgs/priestcase11.png",
+	
 	open_door = "res://assets/priest_case/bgs/priestcase12.png",
 	desk_shop = "res://assets/priest_case/bgs/priestcase13.png",
 	bakerside_kitchen = "res://assets/priest_case/bgs/priestcase14.png",
 	priest_kitchen = "res://assets/priest_case/bgs/priestcase14-2.png",
 	bagel_shot = "res://assets/priest_case/bgs/priestcase14B.png",
+	
 	letter_end = "res://assets/priest_case/bgs/priestcase15A.png",
 	beach_end = "res://assets/priest_case/bgs/priestcase15B.png",
 	
 }
 
-var anim_index = {
+const anim_index = {
 	
 	confess1 = "res://assets/priest_case/anm/priestcase01-curt.png",
 	confess2 = "res://assets/priest_case/anm/priestcase02-rev.png",
@@ -62,6 +71,7 @@ func swap_bg(which):
 	$BG.texture = load(which)
 
 func set_anim(path, framecount):
+	active_anim = false
 	$ANIM_LAYER.hide()
 	$ANIM_LAYER.frame = 0
 	$ANIM_LAYER.texture = load(path)
@@ -74,15 +84,18 @@ func anim_state(state=false):
 
 func end_anim():
 	active_anim = false
-	$ANIM_LAYER.hide()
 	$ANIM_LAYER.frame = 0
+
+
 
 func loop_anim(framecount, persec):
 	while active_anim:
 		await play_anim_once(framecount, persec)
 	$ANIM_LAYER.frame = 0
+	anim_looped.emit()
 
 func play_anim_once(framecount, persec):
 	for i in range(framecount):
 		await get_tree().create_timer(persec).timeout
 		$ANIM_LAYER.frame = i
+	

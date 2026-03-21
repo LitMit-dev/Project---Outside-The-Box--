@@ -1,6 +1,12 @@
 extends CanvasLayer
 #0.07
+
+class_name dialogue
+
 const letpersec = 0.03
+
+var choice = -1
+var is_choosing = false
 
 const ninepatch_colors = {
 	blue="res://assets/priest_case/blue9patch text.png",
@@ -11,6 +17,7 @@ const ninepatch_colors = {
 signal advance_text
 
 var no_echo = false
+var follow_along = false
 
 var indicating = false
 var textEnd = false
@@ -24,17 +31,27 @@ func prog_text():
 		
 		if $Text.text[i-1] != " " and !textEnd:
 			await get_tree().create_timer(letpersec).timeout
+		if $Text.text[i-1] == "," and !textEnd:
+			await get_tree().create_timer(letpersec*3).timeout
+		if $Text.text[i-1] == "." and !textEnd:
+			await get_tree().create_timer(letpersec*5).timeout
 	textEnd = true
 	indicating = true
 	indic_anim()
 	ready_next = true
+	if follow_along:
+		next_part()
 
 func swap_name(newName: String):
 	$Name.text = newName
 
-func swap_dialogue(newText: String):
+func swap_dialogue(newText: String, noskip=false):
 	$Text.text = newText
 	textProg = 0
+	if noskip:
+		follow_along = true
+	else:
+		follow_along = false
 
 func swap_portrait(character: String, expression: String):
 	$Portraitmask/icon.texture = load(character+"-"+expression)
@@ -59,7 +76,7 @@ func _input(event: InputEvent) -> void:
 		no_echo = true
 		if ready_next:
 			next_part()
-		elif !textEnd:
+		elif !textEnd and !follow_along:
 			textEnd = true
 			indicating = true
 			indic_anim()
