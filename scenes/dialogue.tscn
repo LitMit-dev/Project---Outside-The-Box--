@@ -85,8 +85,10 @@ alignment = 1
 [node name="0" type="Button" parent="Choices" unique_id=1417827012]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_fonts/font = ExtResource("8_tp716")
 theme_override_font_sizes/font_size = 32
+button_mask = 0
 text = "[Q] - [Faithful]
 We should talk to his old roommate, Mary Produe."
 flat = true
@@ -95,8 +97,10 @@ autowrap_mode = 2
 [node name="1" type="Button" parent="Choices" unique_id=1803524465]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_fonts/font = ExtResource("8_tp716")
 theme_override_font_sizes/font_size = 32
+button_mask = 0
 text = " [E] - [Lawful]
 The Coroner could tell us more about how he died."
 flat = true

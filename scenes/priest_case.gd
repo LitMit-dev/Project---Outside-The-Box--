@@ -7,9 +7,9 @@ var ALIGNMENT = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#await confessional()
-	await where_first()
-	await interviews()
-	await placeholder()
+	#await where_first()
+	#await interviews()
+	await rat_chase()
 	await placeholder()
 	await placeholder()
 	await placeholder()
@@ -113,7 +113,8 @@ func confessional():
 	DL.prog_text()
 	ANBG.end_anim()
 	await ANBG.anim_looped
-	ANBG.play_anim_once(3, 0.43)
+	ANBG.set_anim(ANBG.anim_index.confess2, 3)
+	await ANBG.play_anim_once(3, 0.43)
 	await DL.advance_text
 	
 	#END
@@ -196,11 +197,13 @@ func where_first():
 	
 
 func interviews():
+	
 	DL.create_choices("We should talk to his old roommate, Mary Produe.", "The Coroner could tell us a lot more about how he died.")
 	var leave_for = await DL.get_choice()
 	if leave_for == 0: #aptment
+		ALIGNMENT -= 1
 		DL.swap_name("Roman")
-		DL.swap_dialogue("Smart, if it's not the spouse, it's usually a neighbour.")
+		DL.swap_dialogue("Smart, if the victim has no spouse, the first to talk to is usually the neighbour.")
 		DL.prog_text()
 		await DL.advance_text
 		DL.swap_dialogue("And who's a closer neighbour than his roommate.")
@@ -273,11 +276,22 @@ func interviews():
 		ANBG.end_anim()
 		await ANBG.anim_looped
 		ANBG.set_anim(ANBG.anim_index.spouse_idle, 5)
+		ANBG.loop_anim(5, 0.43)
 		
 		DL.swap_name("Roman")
 		DL.swap_dialogue("Thanks. Remember, a family history of heart issues can be exploited Sidney.")
 		DL.prog_text()
 		await DL.advance_text
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		
+		DL.indicating_blocked = true
+		ANBG.set_anim(ANBG.anim_index.spouse_window, 12)
+		await ANBG.play_anim_once(12, 0.18)
+		DL.indicating_blocked = false
+		ANBG.set_anim(ANBG.anim_index.spouse_idle, 5)
+		ANBG.loop_anim(5, 0.43)
+		
 		DL.swap_name("Father Sidney")
 		DL.swap_dialogue("Right! like in 2004, that case with the doctor who gave her patients clotting agents on purpose.")
 		DL.prog_text()
@@ -288,36 +302,347 @@ func interviews():
 		ANBG.set_anim(ANBG.anim_index.spouse_talk, 5)
 		ANBG.loop_anim(5, 0.43)
 		DL.swap_name("Mary")
-		DL.swap_dialogue("I did always warn 'im that all those salted bagels he ate were gonna kill 'im one day.")
+		DL.swap_dialogue("I did always warn 'im that all those salted bagels he ate were gonna kill 'im one day...")
 		DL.prog_text()
 		await DL.advance_text
 		ANBG.end_anim()
 		await ANBG.anim_looped
 		ANBG.set_anim(ANBG.anim_index.spouse_idle, 5)
+		ANBG.loop_anim(5, 0.43)
+		DL.swap_name("Roman")
+		DL.swap_dialogue("We understand it was a few months ago, but where were you around the time he died?")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_name("Father Sidney")
+		DL.swap_dialogue("She was in Montreal that week if I remember.", true)
+		await DL.prog_text()
+		
+		DL.swap_name("Roman")
+		DL.swap_dialogue("Let her answer the question.")
+		DL.prog_text()
+		await DL.advance_text
+		
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.spouse_talk, 5)
+		ANBG.loop_anim(5, 0.43)
+		DL.swap_name("Mary")
+		DL.swap_dialogue("No no, Sid's right, I was outta town, but I was in Toronto.")
+		DL.prog_text()
+		await DL.advance_text
+		
+		DL.swap_dialogue("...At a concert with Jacob, soon as I 'eard the news I got in my car. Headed west.")
+		DL.prog_text()
+		await DL.advance_text
+		
+		DL.swap_dialogue("Straight west. back home, here.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("Listened to his cassettes for longer than I want to admit.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("Did they ever find his recorder Sid'? In the church or anythin'? It wasn't in his room.")
+		DL.prog_text()
+		await DL.advance_text
+		
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.swap_bg(ANBG.bg_index.drain)
+		ANBG.set_anim(ANBG.anim_index.drain_drop, 5)
+		DL.swap_name("15 Minutes Ago")
+		DL.swap_dialogue("On the walk to the apartment...", true)
+		await DL.prog_text()
+		
+		DL.swap_name("Roman")
+		DL.swap_dialogue("Can you stop playing with the evidence? You WILL drop it.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_name("Father Sidney")
+		DL.swap_dialogue("What? You never used to fiddle with your cassettes?")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("I'm basically a pro by now, do you know how boring it is to sit and listen in that box?")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("See? I can balance it on my nos-", true)
+		await DL.prog_text()
+		await ANBG.play_anim_once(5, 0.12)
+		
+		ANBG.swap_bg(ANBG.bg_index.spouse_path)
+		ANBG.set_anim(ANBG.anim_index.spouse_idle, 5)
+		ANBG.loop_anim(5, 0.43)
+		
+		DL.swap_name("Father Sidney")
+		DL.swap_dialogue("We uh... never found it, sorry.")
+		DL.prog_text()
+		await DL.advance_text
+		
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.spouse_talk, 5)
+		ANBG.loop_anim(5, 0.43)
+		DL.swap_name("Mary")
+		DL.swap_dialogue("A real shame that is, anythin' else you need to know?")
+		DL.prog_text()
+		await DL.advance_text
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.spouse_idle, 5)
+		ANBG.loop_anim(5, 0.43)
+		DL.swap_name("Father Sidney")
+		DL.swap_dialogue("Any idea where he might've gotten those bagels?")
+		DL.prog_text()
+		await DL.advance_text
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.spouse_talk, 5)
+		ANBG.loop_anim(5, 0.43)
+		DL.swap_name("Mary")
+		DL.swap_dialogue("He was always trying new bakeries, but there was never a favorite.")
+		DL.prog_text()
+		await DL.advance_text
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.spouse_idle, 5)
+		ANBG.loop_anim(5, 0.43)
+		DL.swap_name("Roman")
+		DL.swap_dialogue("Thank you anyways miss. We'll be leaving now.")
+		DL.prog_text()
+		await DL.advance_text
 		
 	elif leave_for == 1: #coroner
+		ALIGNMENT += 1
+		DL.swap_name("Roman")
+		DL.swap_dialogue("Sure, the heart attack is a very key point so far.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("I think it was Lisa Edel who examined the body, at Sandstone General. Good friend of mine.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_name("Father Sidney")
+		DL.swap_dialogue("If we leave now, we'll get there just as the sun rises.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_name("Roman")
+		DL.swap_dialogue("But we haven't even ordered anything to drink yet!")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_name("Father Sidney")
+		DL.swap_dialogue("It's 6:21am, nobody lives here anymore, and the waiter is probably asleep in that closet.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("We'd be waiting a long while. Come on! Let's go!")
+		DL.prog_text()
+		await DL.advance_text
 		
+		###go
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.swap_bg(ANBG.bg_index.lab_path)
+		ANBG.set_anim(ANBG.anim_index.lab_talk, 6)
+		ANBG.loop_anim(6, 0.43)
 		
-		pass
+		DL.swap_name("Doctor Edel")
+		DL.swap_dialogue("P.I Roman, good to see you again. Any developments on the case about the man with the twisted lip?")
+		DL.prog_text()
+		await DL.advance_text
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.lab_idle, 6)
+		ANBG.loop_anim(6, 0.43)
+		DL.swap_name("Roman")
+		DL.swap_dialogue("We can discuss that over lunch tomorrow. We're here about Raisor.")
+		DL.prog_text()
+		await DL.advance_text
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.lab_talk, 6)
+		ANBG.loop_anim(6, 0.43)
+		DL.swap_name("Doctor Edel")
+		DL.swap_dialogue("Minister Raisor? For what purpose?")
+		DL.prog_text()
+		await DL.advance_text
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.lab_idle, 6)
+		ANBG.loop_anim(6, 0.43)
+		DL.swap_name("Father Sidney")
+		DL.swap_dialogue("We believe someone intentionally caused him to have a heart attack, somehow.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_name("Roman")
+		DL.swap_dialogue("You have his medical records, yes?")
+		DL.prog_text()
+		await DL.advance_text
+		
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.lab_talk, 6)
+		ANBG.loop_anim(6, 0.43)
+		DL.swap_name("Doctor Edel")
+		DL.swap_dialogue("Of course, I can't print you a copy obviously.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("But I can tell you two some details, as you are extentions of law enforcement.")
+		DL.prog_text()
+		await DL.advance_text
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.lab_idle, 6)
+		ANBG.loop_anim(6, 0.43)
+		
+		DL.swap_name("Father Sidney")
+		DL.swap_dialogue("Well actually I'm still kind of a prie-", true)
+		await DL.prog_text()
+		
+		DL.swap_name("Roman")
+		DL.swap_dialogue("Sidney, your experience as an Eye lets you be a temporary consultant at any time. It's fine.")
+		DL.prog_text()
+		await DL.advance_text
+		
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.lab_talk, 6)
+		ANBG.loop_anim(6, 0.43)
+		DL.swap_name("Doctor Edel")
+		DL.swap_dialogue("Hm. You must be rusty if you forgot that.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("Now. Raisor.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("His father and aunt both died of heart attacks.")
+		DL.prog_text()
+		await DL.advance_text
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.lab_idle, 6)
+		ANBG.loop_anim(6, 0.43)
+		
+		DL.swap_name("Roman")
+		DL.swap_dialogue("Thanks. Remember, a family history of heart issues can be exploited Sidney.")
+		DL.prog_text()
+		await DL.advance_text
+		
+		DL.swap_name("Father Sidney")
+		DL.swap_dialogue("Right! like in 2004, that case with the doctor who gave her patients clotting agents on purpose.")
+		DL.prog_text()
+		await DL.advance_text
+		
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.lab_talk, 6)
+		ANBG.loop_anim(6, 0.43)
+		DL.swap_name("Doctor Edel")
+		DL.swap_dialogue("Yes, Doctor Nadya. Really did not like her. Glad shes in jail.")
+		DL.prog_text()
+		await DL.advance_text
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.lab_idle, 6)
+		ANBG.loop_anim(6, 0.43)
+		DL.swap_name("Roman")
+		DL.swap_dialogue("Anyway, when he died, was there really nothing in his system?")
+		DL.prog_text()
+		await DL.advance_text
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.lab_talk, 6)
+		ANBG.loop_anim(6, 0.43)
+		DL.swap_name("Doctor Edel")
+		DL.swap_dialogue("No poison, he did however have a lot of salt in his system.")
+		DL.prog_text()
+		await DL.advance_text
+		
+		DL.swap_name("Doctor Edel")
+		DL.swap_dialogue("His stomach contained some form of bread, likely a few bagels or other baked goods.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("We figured he had a really salty lunch and the arteries disliked it.")
+		DL.prog_text()
+		await DL.advance_text
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.lab_idle, 6)
+		ANBG.loop_anim(6, 0.43)
+		DL.swap_name("Father Sidney")
+		DL.swap_dialogue("We really can't be sure how this played out then, or by who.")
+		DL.prog_text()
+		await DL.advance_text
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.lab_talk, 6)
+		ANBG.loop_anim(6, 0.43)
+		DL.swap_name("Doctor Edel")
+		DL.swap_dialogue("He kept a tape recorder, did he not? No list of enemies on a cassette?")
+		DL.prog_text()
+		await DL.advance_text
+		
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.swap_bg(ANBG.bg_index.drain)
+		ANBG.set_anim(ANBG.anim_index.drain_drop, 6)
+		DL.swap_name("16 Minutes Ago")
+		DL.swap_dialogue("*On the walk to the Hospital*", true)
+		await DL.prog_text()
+		
+		DL.swap_name("Roman")
+		DL.swap_dialogue("Can you stop playing with the evidence? You WILL drop it.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_name("Father Sidney")
+		DL.swap_dialogue("What? You never used to fiddle with your cassettes?")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("I'm basically a pro by now, do you know how boring it is to sit and listen in that box?")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("See? I can balance it on my nos-", true)
+		await DL.prog_text()
+		await ANBG.play_anim_once(6, 0.12)
+		
+		ANBG.swap_bg(ANBG.bg_index.lab_path)
+		ANBG.set_anim(ANBG.anim_index.lab_idle, 6)
+		ANBG.loop_anim(6, 0.43)
+		
+		DL.swap_name("Father Sidney")
+		DL.swap_dialogue("He did. As of right now it's still missing.")
+		DL.prog_text()
+		await DL.advance_text
+		
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.lab_talk, 6)
+		ANBG.loop_anim(6, 0.43)
+		DL.swap_name("Doctor Edel")
+		DL.swap_dialogue("Hm. Are there any other details necessary then?")
+		DL.prog_text()
+		await DL.advance_text
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.lab_idle, 6)
+		ANBG.loop_anim(6, 0.43)
+		DL.swap_name("Roman")
+		DL.swap_dialogue("No, thank you. Actually how's the S.C.U.R.R.Y program going?")
+		DL.prog_text()
+		await DL.advance_text
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.lab_talk, 6)
+		ANBG.loop_anim(6, 0.43)
+		DL.swap_name("Doctor Edel")
+		DL.swap_dialogue("Very good, however one of the rats escaped after we taught it to read.")
+		DL.prog_text()
+		await DL.advance_text
+		ANBG.end_anim()
+		await ANBG.anim_looped
+		ANBG.set_anim(ANBG.anim_index.lab_idle, 6)
+		ANBG.loop_anim(6, 0.43)
+		DL.swap_name("Roman")
+		DL.swap_dialogue("That's a shame. See you tomorrow.")
+		DL.prog_text()
+		await DL.advance_text
 	############ADD OPTION CHOICES
-	
-	#Reg dialogue
-	DL.swap_name("_")
-	DL.swap_dialogue("_")
-	DL.prog_text()
-	await DL.advance_text
-	
-	#Cut-off dialogue
-	DL.swap_name("_")
-	DL.swap_dialogue("_", true)
-	await DL.prog_text()
-	
-	#newloop	
-	ANBG.end_anim()
-	await ANBG.anim_looped
-	ANBG.swap_bg(ANBG.bg_index.confess2)
-	ANBG.set_anim(ANBG.anim_index.confess2, 3)
-	ANBG.loop_anim(2, 0.43)
 	
 	#END
 	DL.hide()
@@ -325,8 +650,100 @@ func interviews():
 
 
 func rat_chase():
-	ANBG.set_anim(ANBG.anim_index.priest_conf1, 3)
-	ANBG.loop_anim(3, 0.4)
+	DL.hide()
+	ANBG.swap_bg(ANBG.bg_index.cafe_day)
+	ANBG.set_anim(ANBG.anim_index.cafe_speak, 3)
+	ANBG.loop_anim(3, 0.43)
+	await get_tree().create_timer(0.2).timeout
+	#DIALOGUE START
+	DL.show()
+	
+	DL.swap_name("Father Sidney")
+	DL.swap_dialogue("So basically some guy, likely a baker, gave Raisor a lethal amount of salt.")
+	DL.prog_text()
+	await DL.advance_text
+	DL.swap_name("Roman")
+	DL.swap_dialogue("It just... Sounds so stupid. Where's the motive?")
+	DL.prog_text()
+	await DL.advance_text
+	DL.swap_dialogue("Do you think we're on the right track? At all?")
+	DL.prog_text()
+	await DL.advance_text
+	
+	DL.create_choices("Yes. We'll recieve a sign eventually.", "Probably not.")
+	var investigan = await DL.get_choice()
+	
+	if investigan == 0:
+		ALIGNMENT -= 1
+		DL.swap_name("Roman")
+		DL.swap_dialogue("Yeah. Sure. A 'Sign'. Priesthood changed you man.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("I appreciate your optimism though.")
+		DL.prog_text()
+		await DL.advance_text
+	elif ALIGNMENT == 1:
+		ALIGNMENT += 1
+		DL.swap_name("Roman")
+		DL.swap_dialogue("Pfft. And I thought the church gave you a sense of hope.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("You've always been honest, I like that about you.")
+		DL.prog_text()
+		await DL.advance_text
+	DL.swap_name("Father Sidney")
+	DL.swap_dialogue("Say what you want, we have to find out the truth. Even if we're wrong 50 times.")
+	DL.prog_text()
+	await DL.advance_text
+	
+	DL.swap_name("Roman")
+	DL.swap_dialogue("Sidney. Why are you doing this? What does this 'case' really mean to you?")
+	DL.prog_text()
+	await DL.advance_text
+	
+	DL.create_choices("(Tell the truth)", "(Ignore)")
+	var why = await DL.get_choice()
+	
+	if why == 0:
+		DL.swap_name("Father Sidney")
+		DL.swap_dialogue("When the evacuation happened, I thought everything was over.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("It was a wave of panic, like any of these buildings could come crashing down at any moment.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("Then Raisor found me and took me in.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("He demonstrated to me what it meant to have faith.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("A long time later and the buildings still haven't fell on their own.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_name("Roman")
+		DL.swap_dialogue("They still could you know.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("The government said the stone would fully break down by next spring and we've only just started winter.")
+		DL.prog_text()
+		await DL.advance_text
+		
+		
+	elif why == 1:
+		DL.swap_dialogue("You have your reasons, I get it.")
+		DL.prog_text()
+		await DL.advance_text
+		DL.swap_dialogue("I'm sorry, I was out of line there.")
+		DL.prog_text()
+		await DL.advance_text
+	
+	DL.swap_name("Roman")
+	DL.swap_dialogue("Is that noise annoying you too? Where is it even coming from.")
+	DL.prog_text()
+	await DL.advance_text
+	
+	
 	DL.show()
 	DL.swap_name("Bowie")
 	DL.swap_dialogue("But whooooooooooooo\nWill love alladin saane?")

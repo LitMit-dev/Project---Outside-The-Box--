@@ -7,6 +7,7 @@ const letpersec = 0.03
 
 var choice = -1
 var is_choosing = false
+var indicating_blocked = false
 
 signal option_chosen
 
@@ -114,9 +115,9 @@ func _input(event: InputEvent) -> void:
 			choice = 1
 			option_chosen.emit() 
 		
-		elif ready_next:
+		elif ready_next and !is_choosing:
 			next_part()
-		elif !textEnd and !follow_along:
+		elif !textEnd and !follow_along and !is_choosing:
 			textEnd = true
 			indicating = true
 			indic_anim()
@@ -137,7 +138,7 @@ func next_part():
 	
 func indic_anim():
 	
-	if indicating:
+	if indicating and !indicating_blocked:
 		$next_indic.visible = true
 		return
 #example:

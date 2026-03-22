@@ -90,12 +90,16 @@ func end_anim():
 
 func loop_anim(framecount, persec):
 	while active_anim:
-		await play_anim_once(framecount, persec)
+		if await play_anim_once(framecount, persec) == 2:
+			break
 	$ANIM_LAYER.frame = 0
-	anim_looped.emit()
+	
 
 func play_anim_once(framecount, persec):
 	for i in range(framecount):
 		await get_tree().create_timer(persec).timeout
 		$ANIM_LAYER.frame = i
+		if active_anim == false:
+			anim_looped.emit()
+			return 2
 	
