@@ -10,13 +10,19 @@ func _ready() -> void:
 	#await where_first()
 	#await interviews()
 	#await rat_chase()
-	await rat_wait()
+	#await rat_wait()
 	await bakery()
 	if ALIGNMENT > 0:
 		await law_ending()
 	else:
 		await faith_ending()
 	
+	
+	#TAke to main screen, or blank with "u got a medal"
+	#Finish:
+	#Bakery
+	#Law and faith endings
+	#Count num of opts
 
 func confessional():
 	#SETUP
@@ -993,15 +999,24 @@ func rat_wait():
 		DL.prog_text()
 		await DL.advance_text
 	DL.hide()
+	ANBG.end_anim()
+	await ANBG.anim_looped
 	ANBG.set_anim(ANBG.anim_index.door_unlock, 4)
-	await ANBG.play_anim_once(3, 0.72)
+	await ANBG.play_anim_once(4, 0.72)
+	
+	ANBG.set_anim(ANBG.anim_index.door_wait, 4)
+	ANBG.loop_anim(4, 0.43)
 	DL.show()
 	DL.swap_name("Father Sidney")
 	DL.swap_dialogue("That's our cue.")
 	DL.prog_text()
 	await DL.advance_text
-	
+	DL.hide()
 func bakery():
+	
+	#ANBG.end_anim()
+	#await ANBG.anim_looped
+	DL.hide()
 	
 	ANBG.swap_bg(ANBG.bg_index.open_door)
 	ANBG.set_anim(ANBG.anim_index.door_open, 3)
@@ -1011,52 +1026,99 @@ func bakery():
 	ANBG.set_anim(ANBG.anim_index.bakery_walkin, 4)
 	ANBG.loop_anim(4, 0.43)
 	
+	DL.show()
+	DL.swap_name("Father Sidney")
+	DL.swap_dialogue("Nice Place.")
+	DL.prog_text()
+	await DL.advance_text
+	
 	ANBG.end_anim()
 	await ANBG.anim_looped
 	
 	ANBG.set_anim(ANBG.anim_index.bakery_papers, 4)
 	ANBG.loop_anim(4, 0.43)
+	DL.swap_name("Father Sidney")
+	DL.swap_dialogue("Lets see...")
+	DL.prog_text()
+	await DL.advance_text
+	DL.swap_dialogue("Huh, Financial issues. Sucks to be Mr..... Bolowit?")
+	DL.prog_text()
+	await DL.advance_text
 	
 	ANBG.end_anim()
 	await ANBG.anim_looped
 	
 	ANBG.set_anim(ANBG.anim_index.bakery_noisehear, 4)
+	ANBG.loop_anim(4, 0.43)
+	DL.swap_dialogue("SH. I heard something...")
+	DL.prog_text()
+	await DL.advance_text
+	
+	ANBG.end_anim()
+	await ANBG.anim_looped
+	DL.hide()
+	
+	ANBG.swap_bg(ANBG.bg_index.bakerside_kitchen)
+	ANBG.set_anim(ANBG.anim_index.baker_getup,4)
 	await ANBG.play_anim_once(4, 0.43)
-	
-	
+	#confrontation, whyd ya do it blah blah blah
 	DL.show()
-	DL.swap_name("_")
-	DL.swap_dialogue("_")
+	ANBG.set_anim(ANBG.anim_index.baker_caution, 4)
+	ANBG.loop_anim(4, 0.43)
+	DL.swap_name("Father Sidney")
+	DL.swap_dialogue("Lets see...")
+	DL.prog_text()
+	await DL.advance_text
+	ANBG.end_anim()
+	await ANBG.anim_looped
+	
+	ANBG.swap_bg(ANBG.bg_index.priest_kitchen)
+	ANBG.set_anim(ANBG.anim_index.kitchen_talk, 4)
+	ANBG.loop_anim(4, 0.43)
+	DL.swap_name("Baker")
+	DL.swap_dialogue("Lets see...")
+	DL.prog_text()
+	await DL.advance_text
+	ANBG.end_anim()
+	await ANBG.anim_looped
+	
+	#at the end
+	ANBG.swap_bg(ANBG.bg_index.priest_kitchen)
+	ANBG.set_anim(ANBG.anim_index.kitchen_evidence, 4)
+	ANBG.loop_anim(4, 0.43)
+	DL.swap_name("Baker")
+	DL.swap_dialogue("Lets see...")
+	DL.prog_text()
+	await DL.advance_text
+	ANBG.end_anim()
+	await ANBG.anim_looped
+	
+	#fit in somewhere
+	
+	ANBG.swap_bg(ANBG.bg_index.bagel_shot)
+	ANBG.get_node("ANIM_LAYER").hide()
+	DL.swap_name("Bagel")
+	DL.swap_dialogue("Lets see...")
 	DL.prog_text()
 	await DL.advance_text
 	
-	ANBG.set_anim(ANBG.anim_index.priest_conf1, 3)
-	ANBG.loop_anim(3, 0.4)
-	DL.show()
-	DL.swap_name("Bowie")
-	DL.swap_dialogue("But whooooooooooooo\nWill love alladin saane?")
-	DL.prog_text()
-	await DL.advance_text
-	DL.swap_dialogue("Tis a pity she was a whore") #please ignore the david bowie placeholders
-	DL.prog_text()
-	await DL.advance_text
-	DL.swap_dialogue("Ground control to MAAAAAJor tom")
-	DL.prog_text()
-	await DL.advance_text
 	DL.hide()
 	ANBG.anim_state(false)
 
 func law_ending():
 	
 	#SETUP
-	ANBG.swap_bg(ANBG.bg_index.confess1)
-	ANBG.set_anim(ANBG.anim_index.confess1, 3)
-	ANBG.loop_anim(3, 0.43)
+	ANBG.swap_bg(ANBG.bg_index.beach_end)
+	ANBG.set_anim(ANBG.anim_index.beach_walk, 18)
+	await ANBG.play_anim_once(18, 0.22)
+	
+	ANBG.set_anim(ANBG.anim_index.beach_stand, 12)
+	ANBG.loop_anim(12, 0.33)
 	
 	#DIALOGUE START
 	DL.show()
-	DL.swap_name("_")
-	DL.swap_dialogue("_")
+	DL.swap_name("Sidney")
+	DL.swap_dialogue("You wus right dude")
 	DL.prog_text()
 	await DL.advance_text
 	
@@ -1086,14 +1148,14 @@ func law_ending():
 func faith_ending():
 	
 	#SETUP
-	ANBG.swap_bg(ANBG.bg_index.confess1)
-	ANBG.set_anim(ANBG.anim_index.confess1, 3)
-	ANBG.loop_anim(3, 0.43)
-	
+	ANBG.swap_bg(ANBG.bg_index.letter_end)
+	ANBG.set_anim(ANBG.anim_index.letter_writing, 9)
+	await ANBG.play_anim_once(9, 0.30)
+		
 	#DIALOGUE START
 	DL.show()
-	DL.swap_name("_")
-	DL.swap_dialogue("_")
+	DL.swap_name("Minister Sidney")
+	DL.swap_dialogue("Dear Roman, be jolly.")
 	DL.prog_text()
 	await DL.advance_text
 	
@@ -1128,7 +1190,7 @@ func placeholder():
 	
 	#DIALOGUE START
 	DL.show()
-	DL.swap_name("_")
+	DL.swap_name("")
 	DL.swap_dialogue("_")
 	DL.prog_text()
 	await DL.advance_text

@@ -36,7 +36,7 @@ const bg_index = {
 }
 
 const anim_index = {
-	
+	NONE = null,
 	confess1 = "res://assets/priest_case/anm/priestcase01-curt.png",
 	confess2 = "res://assets/priest_case/anm/priestcase02-rev.png",
 	show_taperec = "res://assets/priest_case/anm/priestcase03-show.png",
@@ -97,8 +97,8 @@ func loop_anim(framecount, persec):
 
 func play_anim_once(framecount, persec):
 	for i in range(framecount):
-		await get_tree().create_timer(persec).timeout
 		$ANIM_LAYER.frame = i
+		await get_tree().create_timer(persec).timeout
 		if active_anim == false:
 			anim_looped.emit()
 			return 2
