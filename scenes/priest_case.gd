@@ -805,7 +805,7 @@ func rat_chase():
 	await get_tree().create_timer(1.4).timeout
 	
 	DL.swap_name("Roman")
-	DL.swap_dialogue("Catch it! Now!", true)
+	DL.swap_dialogue("Catch it! Quickly!", true)
 	DL.prog_text()
 	ANBG.swap_bg(ANBG.bg_index.deadend_alley)
 	ANBG.set_anim(ANBG.anim_index.alley_ratchase, 3)
@@ -1048,18 +1048,19 @@ func bakery():
 	DL.swap_dialogue("(He hasn't paid rent in a while.)")
 	DL.prog_text()
 	await DL.advance_text
-	DL.swap_dialogue("(Why would he do this?)")
+	DL.swap_dialogue("(Is that why he did this?)")
 	DL.prog_text()
 	await DL.advance_text
-	DL.swap_dialogue("(A list of recipes too.)")
+	DL.swap_dialogue("(Financial motive? But he didn't steal anything expensive...)")
+	DL.prog_text()
+	await DL.advance_text 
+	DL.swap_dialogue("(Oh, there's a menu here too.)")
 	DL.prog_text()
 	await DL.advance_text
 	DL.swap_dialogue("(Bear claws... Brownies... Cupcakes......... and Salted Bagels.)")
 	DL.prog_text()
 	await DL.advance_text 
 
-	DL.prog_text()
-	await DL.advance_text 
 
 	ANBG.end_anim()
 	await ANBG.anim_looped
@@ -1080,24 +1081,51 @@ func bakery():
 	#confrontation, whyd ya do it blah blah blah
 	DL.show()
 	ANBG.set_anim(ANBG.anim_index.baker_caution, 4)
-	ANBG.loop_anim(4, 0.43)
-	DL.swap_name("Father Sidney")
-	DL.swap_dialogue("Lets see...")
-	DL.prog_text()
-	await DL.advance_text
+	ANBG.play_anim_once(4, 0.43)
+	
 	ANBG.end_anim()
-	await ANBG.anim_looped
+	await ANBG.anim_looped######amend
 	
 	ANBG.swap_bg(ANBG.bg_index.priest_kitchen)
 	ANBG.set_anim(ANBG.anim_index.kitchen_talk, 4)
 	ANBG.loop_anim(4, 0.43)
-	DL.swap_name("Baker")
-	DL.swap_dialogue("Lets see...")
+	DL.swap_name("???")
+	DL.swap_dialogue("Bakery's closed. How did you get in?-", true)
+	await DL.prog_text()
+	ANBG.set_anim(ANBG.anim_index.baker_caution, 4)
+	ANBG.play_anim_once(4, 0.43)
+	DL.swap_name("Father Sidney")
+	DL.swap_dialogue("How are you today. My child?")
 	DL.prog_text()
 	await DL.advance_text
 	ANBG.end_anim()
 	await ANBG.anim_looped
-	
+	ANBG.set_anim(ANBG.anim_index.baker_caution, 4)
+	ANBG.loop_anim(4, 0.43)
+	DL.swap_name("???")
+	DL.swap_dialogue("Good. You work at the church, don't you? Father uh... Remind me.")
+	DL.prog_text()
+	await DL.advance_text
+	DL.swap_name("Father Sidney")
+	DL.swap_dialogue("Sidney, but you already knew that, didn't you.")
+	DL.prog_text()
+	await DL.advance_text
+	DL.swap_name("Roman")
+	DL.swap_dialogue("Would you mind answering a few questions.")
+	DL.prog_text()
+	await DL.advance_text
+	DL.swap_name("???")
+	DL.swap_dialogue("Of course, but uh. I have a... I need to go to")
+	DL.prog_text()
+	await DL.advance_text
+	DL.swap_dialogue("I can come to the church tomorrow if-", true)
+	DL.prog_text()
+	await DL.advance_text
+	DL.swap_name("Roman")
+	DL.swap_dialogue("Don't worry, it won't take long.")
+	DL.prog_text()
+	await DL.advance_text
+
 	#at the end
 	ANBG.swap_bg(ANBG.bg_index.priest_kitchen)
 	ANBG.set_anim(ANBG.anim_index.kitchen_evidence, 4)

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://saxniikm2xgp"]
+
+[ext_resource type="Script" uid="uid://dkx4p21oc14u2" path="res://typeogranda.gd" id="1_bficp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_opsim"]
+size = Vector2(88, 33)
+
+[node name="INTERACT" type="Area2D" unique_id=506953749]
+script = ExtResource("1_bficp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=6283482]
+position = Vector2(-1, 0.5)
+shape = SubResource("RectangleShape2D_opsim")
+
+[connection signal="body_entered" from="." to="." method="enterArea"]
+[connection signal="body_exited" from="." to="." method="exitArea"]
