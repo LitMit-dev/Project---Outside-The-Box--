@@ -8,6 +8,8 @@ var jumpAvailible = true
 var isSinging = false
 var MenuActive = false
 var transing = false
+var lettertrans = false
+var alert = false
 
 @export var baseZ = 5
 
@@ -50,22 +52,31 @@ func menu_close():
 	MenuActive = false
 	
 func start_voice():
-	if !globdat.has_tape_rec or rat_id == 2 or rat_id == 6 or rat_id != globdat.cur_rat or MenuActive:
+	
+	if !globdat.has_tape_rec or rat_id == 2 or rat_id == 6 or rat_id != globdat.cur_rat or MenuActive or lettertrans:
 		
 		return
 	$LTR_PARENT/LETTERBOX.show()
-	$LineEdit.grab_focus()
 	$"text anim".play("LETTERS")
 	$"speak anim".play("drop")
-	await get_tree().create_timer(0.4).timeout
+	lettertrans = true
+	await get_tree().create_timer(0.5).timeout
+	lettertrans = false
 	isSinging = true
+	text = ""
+	for i in range(MAX_TEXT):
+		text += "_"
+	$LineEdit.grab_focus()
 	
 func end_voice():
+	if rat_id != globdat.cur_rat or lettertrans:
+		return
 	$LineEdit.release_focus()
 	$"speak anim".play_backwards("drop")
+	lettertrans = true
 	await get_tree().create_timer(0.5).timeout
+	lettertrans = false
 	isSinging = false
-	await get_tree().create_timer(0.1).timeout
 	$LTR_PARENT/LETTERBOX.hide()
 	$LineEdit.text = ""
 	text = ""
@@ -99,6 +110,7 @@ func _input(event: InputEvent) -> void:
 			menu_close()
 			
 func _ready() -> void:
+	
 	$LineEdit.max_length = MAX_TEXT
 	for i in range(5):
 		if i >= MAX_TEXT:
@@ -145,7 +157,7 @@ func _physics_process(delta):
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
+	var direction := Input.get_axis("left", "right")
 	if direction and !isSinging and !MenuActive:
 		velocity.x = direction * SPEED
 		$Rat_Sprite.flip_h = velocity.x > 0

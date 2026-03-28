@@ -431,10 +431,10 @@ target_position = Vector2(0, 1)
 hit_from_inside = true
 
 [node name="LineEdit" type="LineEdit" parent="." unique_id=644038524]
-offset_left = -71.0
-offset_top = 678.0
-offset_right = 98.0
-offset_bottom = 709.0
+offset_left = -84.0
+offset_top = -108.0
+offset_right = 85.0
+offset_bottom = -77.0
 placeholder_text = "_____"
 alignment = 1
 max_length = 5
@@ -506,6 +506,28 @@ theme = SubResource("Theme_0g0h3")
 text = "_"
 horizontal_alignment = 1
 
+[node name="POPUP" type="RichTextLabel" parent="." unique_id=1499824123]
+visible = false
+z_index = 50
+texture_filter = 2
+offset_left = -199.0
+offset_top = -34.0
+offset_right = 703.2727
+offset_bottom = 13.727272
+scale = Vector2(0.44, 0.44)
+theme_override_colors/default_color = Color(0.65834004, 0.6583399, 0.6583399, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_separation = -3
+theme_override_constants/outline_size = 11
+theme_override_fonts/normal_font = ExtResource("4_3csnj")
+theme_override_fonts/bold_font = ExtResource("3_acf8p")
+theme_override_font_sizes/normal_font_size = 43
+theme_override_font_sizes/bold_font_size = 42
+bbcode_enabled = true
+text = " [color=#ff0000][R][/color] READ"
+scroll_active = false
+horizontal_alignment = 1
+
 [node name="TR" type="RichTextLabel" parent="." unique_id=276385531]
 z_index = 50
 texture_filter = 2
@@ -548,7 +570,7 @@ theme_override_font_sizes/bold_font_size = 42
 bbcode_enabled = true
 text = " [b]General Controls[/b] 
  [color=#ff3344][Space][/color] - Jump 
- [color=#ff3344][M][/color] -  Menu"
+ [color=#ff3344][M][/color] - Menu"
 scroll_active = false
 
 [node name="Transitor" type="AnimationPlayer" parent="." unique_id=1031804365]

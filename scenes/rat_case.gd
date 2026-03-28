@@ -4,14 +4,14 @@ extends Node2D
 
 const RAT_DIALOGUE = {
 	
-	"0"=["And the rat climbed, for it had no where else to go.", 
+	"0"=["And the rat climbed, for it had nowhere else to go.", 
 		"Up the pipe, wondering, why it was there in the first place.", 
 		"But the rat felt the importance of the device.", 
 		"It persisted upwards, until a crack of opportunity allowed its freedom." 
 		],
 		
 	"1"=["It was drawn in by the half-familiar smell. Yet again the rat found itself driven by the strive to continue.", 
-		"So it knew to try garner attention.", 
+		"So it knew to try and garner attention.", 
 		"That was its method to find the owner of the device.",
 		],
 	
@@ -24,7 +24,7 @@ const RAT_DIALOGUE = {
 		"Thus, I conclude the story of the rat.", 
 		"In summary.", 
 		"The rat found itself lost, grasping for any familiarity.", 
-		"Yet it had a heart, a heart of which was more caring than most people.", 
+		"Yet it had a heart, a heart of which was more caring than most.", 
 		"It had donned the duty of finding the owner of the device, whilst trying to solve the case of its own identity.",
 		"The rat never knew the owner was long gone. It never truly had a home either.",
 		"Yet, I strive to be the rat, we should strive to have its level of persistence.", 
@@ -34,6 +34,8 @@ const RAT_DIALOGUE = {
 		"I must follow my ambition. After all, 'Every human's life ends the same way.'",
 		"'It's only the details of how they lived and how they died that distinguish one person from another.'",
 		"My wish is to live in a new way where I can help more people than I do now.",
+		"Sandstone is like our box, we feel trapped but we can leave at any time.",
+		"I encourage you all to do the same as the rat, find your way Outside The Box. Follow yourself.",
 		"Thank you all."
 		]
 }
@@ -43,7 +45,7 @@ func _ready() -> void:
 	DL.not_active = true
 	DL.ratify()
 	DL.hide()
-	globdat.cur_rat = 3
+	globdat.cur_rat = 1
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

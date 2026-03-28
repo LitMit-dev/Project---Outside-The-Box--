@@ -1,5 +1,5 @@
 # Adjacent Analysis RatPriest game calendar
-#Curday = 26
+#Curday = 28
 #in event screens 2 and 3 arent done by wk2 end, drop 2nd case to focus on final and polish
 
 #Remember, think OUTSIDE THE BOX!
@@ -38,15 +38,20 @@ Week 4 (23-29) {
 	#####Thu: Work on Screen 2: Implement Balcony sec ET round off. ound off any other mechanics: peer, swap, etc. Implement newspapers.
 	#######Fri: Work on Screen 2: Implement Bakery sec, create title screen, ,  any other mechanics: peer, swap, etc. 
 	
-	Sat: Finish off Bakery sec and others: MECHANICS,  Implement newspapers. 
-	Sun: Have screen 2 done , draw S3 badges, sfx, create "marketing",  MUSIC DEADLINES, start "marketing" PLEASE MAKE ENDING FOR RATTHEW
+	#######Sat: Finish off Bakery sec and others: MECHANICS,   
+	Sun: Have screen 2 done , Implement newspapers. draw S3 badges, sfx, MUSIC DEADLINES, HINTS!!!!!!
 }
 Finaliser (30/31) {
-	Mon: MARKETING, start short, FINALISE S3 SCRIPT. Polish/Export YT SHORT DEADLINE (ANIMATION W MUSIC)
+	Mon: MARKETING, start short, FINALISE S3 SCRIPT. Polish/
 	
-	Tue: Web&EXE Export Due
+	Tue: Web&EXE Export Due, Export YT SHORT DEADLINE (ANIMATION W MUSIC)
+
 }
 
+DIA DE MUERTE: WEDNESDAY 01 APRIL MIDNIGHT:01
+HORAS LEFT: 78ISH
+
+ATHOTH! A GO GO!
 
 IF SPARE TIME AT ANY PT, DO
 -MAIN SCREEN + ART

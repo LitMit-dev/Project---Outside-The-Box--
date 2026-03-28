@@ -8,7 +8,7 @@ var rat_stages = ["malic"]
 
 var cur_rat = 1
 
-var has_tape_rec = true
+var has_tape_rec = false
 
 var settings = {
 	MUSIC = false,

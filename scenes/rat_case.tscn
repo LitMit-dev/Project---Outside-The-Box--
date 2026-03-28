@@ -20,8 +20,10 @@
 [ext_resource type="PackedScene" uid="uid://saxniikm2xgp" path="res://scenes/typeogranda.tscn" id="15_74pgo"]
 [ext_resource type="Texture2D" uid="uid://751gaecnhh5i" path="res://assets/rat_case/fugly poster.png" id="17_fxgqy"]
 [ext_resource type="Texture2D" uid="uid://rxtkroiv0fmg" path="res://assets/rat_case/fugly poster-text1.png" id="18_f8q2k"]
+[ext_resource type="Script" uid="uid://b64x6pniotw5g" path="res://scenes/newspaper.gd" id="20_7o785"]
 [ext_resource type="Texture2D" uid="uid://582opnvqwu33" path="res://assets/rat_case/AC.PNG" id="21_kxhra"]
 [ext_resource type="PackedScene" uid="uid://dwylfs0y0vpqk" path="res://scenes/dialogue.tscn" id="22_txnx6"]
+[ext_resource type="Texture2D" uid="uid://b6bxi4epwevox" path="res://assets/rat_case/TAPEREC.PNG" id="23_gdbgu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7xb88"]
 texture = ExtResource("1_8dh4g")
@@ -625,7 +627,7 @@ stretch_mode = 1
 
 [node name="pickup tape" type="Area2D" parent="." unique_id=935601499 node_paths=PackedStringArray("bodyLink")]
 script = ExtResource("11_fwq03")
-bodyLink = NodePath("../Rat1")
+bodyLink = NodePath("../Taperec")
 
 [node name="marghan" type="CollisionShape2D" parent="pickup tape" unique_id=410547386]
 position = Vector2(865, -10.5)
@@ -855,6 +857,14 @@ texture = ExtResource("12_fwq03")
 flip_h = true
 vframes = 8
 
+[node name="Newspaper" type="Area2D" parent="Newspapers" unique_id=1296360618 node_paths=PackedStringArray("bodyLink")]
+script = ExtResource("20_7o785")
+bodyLink = NodePath("../../Rat1")
+
+[node name="NP" type="CollisionShape2D" parent="Newspapers/Newspaper" unique_id=689367443]
+position = Vector2(865, -10.5)
+shape = SubResource("RectangleShape2D_otbed")
+
 [node name="interact" type="Node2D" parent="." unique_id=1705868004]
 
 [node name="Talk" parent="interact" unique_id=506953749 node_paths=PackedStringArray("bodyLink") instance=ExtResource("15_74pgo")]
@@ -943,5 +953,12 @@ texture = ExtResource("21_kxhra")
 offset = Vector2(-52.5, 0)
 transform = Transform2D(1, 0, 0, 1, -52.5, 0)
 
+[node name="Taperec" type="Sprite2D" parent="." unique_id=654517186]
+position = Vector2(858, 20)
+scale = Vector2(2, 2)
+texture = ExtResource("23_gdbgu")
+
 [connection signal="body_entered" from="pickup tape" to="pickup tape" method="enterArea"]
 [connection signal="body_exited" from="pickup tape" to="pickup tape" method="exitArea"]
+[connection signal="body_entered" from="Newspapers/Newspaper" to="Newspapers/Newspaper" method="enterArea"]
+[connection signal="body_exited" from="Newspapers/Newspaper" to="Newspapers/Newspaper" method="exitArea"]
