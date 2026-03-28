@@ -4,10 +4,25 @@ var col
 const SPEED = 340.0
 const jump_speed = -590.0
 var jumpAvailible = true
-var MAX_TEXT = 4
+@export var MAX_TEXT = 4
 var isSinging = false
+var MenuActive = false
+var transing = false
+
+@export var baseZ = 5
 
 var text = "_____"
+
+func smooth_out():
+	z_index = 99
+	transing = true
+	$Transitor.play("fade_in")
+	
+
+func smooth_in():
+	z_index = baseZ
+	$Transitor.play_backwards("fade_in")
+	transing = false
 
 func update_voice():
 	$LineEdit.text = $LineEdit.text.remove_chars(" ")
@@ -22,8 +37,20 @@ func update_voice():
 		get_node("LTR_PARENT/LETTERBOX/" + str(i)).text = text[i]
 	
 
+func menu_open():
+	if rat_id != globdat.cur_rat:
+		return
+	$"speak anim".play("menu open")
+	await get_tree().create_timer(0.4).timeout
+	MenuActive = true
+	
+func menu_close():
+	$"speak anim".play_backwards("menu open")
+	await get_tree().create_timer(0.4).timeout
+	MenuActive = false
+	
 func start_voice():
-	if !globdat.has_tape_rec or rat_id == 2 or rat_id == 6 or rat_id != globdat.cur_rat:
+	if !globdat.has_tape_rec or rat_id == 2 or rat_id == 6 or rat_id != globdat.cur_rat or MenuActive:
 		
 		return
 	$LTR_PARENT/LETTERBOX.show()
@@ -41,7 +68,9 @@ func end_voice():
 	await get_tree().create_timer(0.1).timeout
 	$LTR_PARENT/LETTERBOX.hide()
 	$LineEdit.text = ""
-	text = "____"
+	text = ""
+	for i in range(MAX_TEXT):
+		text += "_"
 	update_voice()
 
 func jump():
@@ -54,11 +83,21 @@ func CoyoteEnd():
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
-		if event.is_action_pressed("START_SONG") and !isSinging:
+		if event.is_action_pressed("START_SONG") and !isSinging and !MenuActive:
 			start_voice()
 		elif event.is_action_pressed("END_SONG") and isSinging:
 			end_voice()
-	
+		elif event.is_action_pressed("hints") and MenuActive:
+			globdat.settings.HINTS = globdat.settings.HINTS 
+		elif event.is_action_pressed("musictog") and MenuActive:
+			globdat.settings.MUSIC = globdat.settings.MUSIC
+		elif event.is_action_pressed("exit") and MenuActive:
+			get_tree().call_deferred("change_scene_to_file", "res://scenes/main.tscn")
+		elif event.is_action_pressed("menutog") and !MenuActive and !isSinging:
+			menu_open()
+		elif event.is_action_pressed("menutog") and MenuActive:
+			menu_close()
+			
 func _ready() -> void:
 	$LineEdit.max_length = MAX_TEXT
 	for i in range(5):
@@ -90,14 +129,15 @@ func _physics_process(delta):
 	
 	velocity += get_gravity() * delta
 	
-	$TR.visible = (globdat.cur_rat == rat_id and (rat_id != 2 and rat_id != 6))
+	$TR.visible = (globdat.cur_rat == rat_id and (rat_id != 2 and rat_id != 6)) and globdat.has_tape_rec and !transing
+	$TR2.visible = globdat.cur_rat == rat_id and !transing
 	
 	if globdat.cur_rat != rat_id:
 		$Rat_Anims.play("idle")
 		move_and_slide()
 		return
 
-	if Input.is_action_just_pressed("ui_accept") and jumpAvailible and !isSinging:
+	if Input.is_action_just_pressed("ui_accept") and jumpAvailible and !isSinging and !MenuActive:
 		jump()
 		
 	if (!is_on_floor()) and jumpAvailible and $CoyoteTimer.is_stopped():
@@ -106,7 +146,7 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction and !isSinging:
+	if direction and !isSinging and !MenuActive:
 		velocity.x = direction * SPEED
 		$Rat_Sprite.flip_h = velocity.x > 0
 		if get_real_velocity() == Vector2(0,0):

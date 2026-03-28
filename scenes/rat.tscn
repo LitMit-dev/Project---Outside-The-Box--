@@ -4,6 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://csgqnhmnxduhx" path="res://assets/rat_case/rat_sprite_sheet.png" id="2_77a1s"]
 [ext_resource type="FontFile" uid="uid://ffaomchs73fp" path="res://assets/fonts/Jersey_10/Jersey10-Regular.ttf" id="3_acf8p"]
 [ext_resource type="FontFile" uid="uid://ljlhcdrrm26a" path="res://assets/fonts/VT323/VT323-Regular.ttf" id="4_3csnj"]
+[ext_resource type="FontFile" uid="uid://dt745qt46j11r" path="res://assets/fonts/Courier_Prime/CourierPrime-Italic.ttf" id="5_368s2"]
+[ext_resource type="FontFile" uid="uid://dd6ovfq8nd41f" path="res://assets/fonts/Courier_Prime/CourierPrime-Bold.ttf" id="6_nnna8"]
+
+[sub_resource type="Gradient" id="Gradient_1ux2h"]
+offsets = PackedFloat32Array(0, 0.21764706, 0.8352941, 1)
+colors = PackedColorArray(1, 1, 1, 0, 0, 0, 0, 0.25882354, 0.11842099, 0.11842099, 0.11842099, 0.2281734, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fdlk1"]
+gradient = SubResource("Gradient_1ux2h")
+width = 109
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_77a1s"]
 radius = 13.0
@@ -161,6 +171,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("menu:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_po2hf"]
 resource_name = "drop"
@@ -213,6 +235,23 @@ tracks/0/keys = {
 "values": [2, 3, 4, 5, 3, 3]
 }
 
+[sub_resource type="Animation" id="Animation_0g0h3"]
+resource_name = "menu open"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("menu:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.3),
+"transitions": PackedFloat32Array(1, 1, 0.31863996),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_368s2"]
 resource_name = "rise"
 length = 0.2
@@ -255,6 +294,7 @@ _data = {
 &"drop": SubResource("Animation_po2hf"),
 &"fall": SubResource("Animation_6s34g"),
 &"idle": SubResource("Animation_3csnj"),
+&"menu open": SubResource("Animation_0g0h3"),
 &"rise": SubResource("Animation_368s2"),
 &"run": SubResource("Animation_77a1s")
 }
@@ -265,10 +305,92 @@ default_font_size = 38
 Label/colors/font_outline_color = Color(0, 0, 0.81960785, 0.7882353)
 Label/constants/outline_size = 7
 
+[sub_resource type="Animation" id="Animation_1ux2h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fdlk1"]
+resource_name = "fade_in"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7bnys"]
+_data = {
+&"RESET": SubResource("Animation_1ux2h"),
+&"fade_in": SubResource("Animation_fdlk1")
+}
+
+[sub_resource type="Gradient" id="Gradient_kc3ue"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ucpu4"]
+gradient = SubResource("Gradient_kc3ue")
+
 [node name="Rat" type="CharacterBody2D" unique_id=1189129737]
 z_index = 5
 floor_stop_on_slope = false
 script = ExtResource("1_1l88y")
+
+[node name="menu" type="Node2D" parent="." unique_id=839879542]
+modulate = Color(1, 1, 1, 0)
+z_index = 52
+
+[node name="TextureRect" type="TextureRect" parent="menu" unique_id=1459227269]
+z_index = 51
+offset_left = 210.0
+offset_top = -156.0
+offset_right = 330.76337
+offset_bottom = 262.85852
+rotation = 1.5707964
+texture = SubResource("GradientTexture1D_fdlk1")
+
+[node name="TR" type="RichTextLabel" parent="menu" unique_id=1749970600]
+z_index = 50
+texture_filter = 2
+offset_left = -198.99998
+offset_top = -135.0
+offset_right = 703.2727
+offset_bottom = 55.90909
+scale = Vector2(0.44, 0.44)
+theme_override_colors/default_color = Color(0, 0.49019608, 0.9882353, 1)
+theme_override_constants/line_separation = -3
+theme_override_constants/outline_size = 11
+theme_override_fonts/normal_font = ExtResource("5_368s2")
+theme_override_fonts/bold_font = ExtResource("6_nnna8")
+theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/bold_font_size = 48
+bbcode_enabled = true
+text = "[b]MENU[/b] 
+[H] - BACKGROUND HINTS [color=#00ff00](ENABLED)[/color]
+[T] - TOGGLE MUSIC [color=#FF0000](OFF)[/color]
+[ESC] - QUIT TO MAIN MENU 
+[color=#FF4444](PROGRESS IS NOT SAVED)[/color]"
+scroll_active = false
+horizontal_alignment = 1
 
 [node name="collider0" type="CollisionShape2D" parent="." unique_id=22856481]
 position = Vector2(0, 4)
@@ -385,10 +507,11 @@ text = "_"
 horizontal_alignment = 1
 
 [node name="TR" type="RichTextLabel" parent="." unique_id=276385531]
+z_index = 50
 texture_filter = 2
-offset_left = -202.0
+offset_left = -99.0
 offset_top = 88.0
-offset_right = 484.36365
+offset_right = 587.36365
 offset_bottom = 226.63635
 scale = Vector2(0.44, 0.44)
 theme_override_colors/default_color = Color(0.65834004, 0.6583399, 0.6583399, 1)
@@ -400,10 +523,45 @@ theme_override_fonts/bold_font = ExtResource("3_acf8p")
 theme_override_font_sizes/normal_font_size = 43
 theme_override_font_sizes/bold_font_size = 42
 bbcode_enabled = true
-text = " [b]Tape Recorder Controls[/b]
- [color=#ff3344][E][/color] - Start Recording
- [color=#ff3344][Q][/color] - Play/End Recording"
+text = "[b]Tape Recorder Controls[/b] 
+Start Recording - [color=#ff3344][E][/color] 
+Play/End Recording - [color=#ff3344][Q][/color] "
 scroll_active = false
+horizontal_alignment = 2
+
+[node name="TR2" type="RichTextLabel" parent="." unique_id=1302617117]
+z_index = 50
+texture_filter = 2
+offset_left = -198.99998
+offset_top = 88.0
+offset_right = 487.36365
+offset_bottom = 226.63635
+scale = Vector2(0.44, 0.44)
+theme_override_colors/default_color = Color(0.65834004, 0.6583399, 0.6583399, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_separation = -3
+theme_override_constants/outline_size = 11
+theme_override_fonts/normal_font = ExtResource("4_3csnj")
+theme_override_fonts/bold_font = ExtResource("3_acf8p")
+theme_override_font_sizes/normal_font_size = 43
+theme_override_font_sizes/bold_font_size = 42
+bbcode_enabled = true
+text = " [b]General Controls[/b] 
+ [color=#ff3344][Space][/color] - Jump 
+ [color=#ff3344][M][/color] -  Menu"
+scroll_active = false
+
+[node name="Transitor" type="AnimationPlayer" parent="." unique_id=1031804365]
+libraries/ = SubResource("AnimationLibrary_7bnys")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1151529460]
+modulate = Color(1, 1, 1, 0)
+z_index = -1
+offset_left = -204.0
+offset_top = -155.0
+offset_right = 206.0
+offset_bottom = 154.0
+texture = SubResource("GradientTexture1D_ucpu4")
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="CoyoteEnd"]
 [connection signal="text_changed" from="LineEdit" to="." method="check_text"]

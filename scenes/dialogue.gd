@@ -19,6 +19,7 @@ const ninepatch_colors = {
 
 signal advance_text
 
+var not_active = false
 var no_echo = false
 var follow_along = false
 
@@ -58,6 +59,23 @@ func swap_dialogue(newText: String, noskip=false):
 
 func swap_portrait(character: String, expression: String):
 	$Portraitmask/icon.texture = load(character+"-"+expression)
+
+func ratify():
+	offset.x = -52.5
+	$Text.show()
+	$next_indic.hide()
+	$NinePatchRect.hide()
+	$icon2.hide()
+	$Portraitmask.hide()
+	$Name.hide()
+	
+func priestify():
+	offset.x = 0
+	$Text.show()
+	$NinePatchRect.show()
+	$icon2.show()
+	$Portraitmask.show()
+	$Name.show()
 
 func swap_textbox(color):
 	$NinePatchRect.texture = load(color)
@@ -104,6 +122,8 @@ func destroy_choices():
 	
 
 func _input(event: InputEvent) -> void:
+	if not_active:
+		return
 	if event is InputEventKey and !no_echo:
 		no_echo = true
 		

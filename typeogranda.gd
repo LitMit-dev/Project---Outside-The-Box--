@@ -26,12 +26,29 @@ func logic():
 		if word == "SWAP_":
 			globdat.cur_rat = additional_links[0]
 		inside = false
+		if word == "MOCHA":
+			get_node(additional_links[0]).monitoring = true
+			
 	elif actionID == 1:
 		get_node(additional_links[0]).frame = 1
 		get_node(additional_links[1]).disabled = !get_node(additional_links[1]).disabled
 		globdat.cur_rat = additional_links[2]
 		inside = false
 		get_node(additional_links[3]).monitoring = false
+	elif actionID == 2:
+		inside = false
+		monitoring = false
+		bodyLink.smooth_out()
+		
+		await get_tree().create_timer(0.8).timeout
+		await get_parent().get_parent().talk(additional_links[2])
+		get_node(additional_links[1]).smooth_in()
+		bodyLink.menu_close()
+		bodyLink.end_voice()
+		if additional_links[0] is int:
+			globdat.cur_rat = additional_links[0]
+		else:
+			get_tree().call_deferred("change_scene_to_file", additional_links[0])
 
 func enterArea(body: Node2D) -> void:
 	if "Rat" not in body.name: return

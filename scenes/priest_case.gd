@@ -6,6 +6,9 @@ var ALIGNMENT = 0
 @export var ANBG: animatedBg
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	DL.priestify()
+	
 	#await confessional()
 	#await where_first()
 	#await interviews()
